@@ -15,7 +15,7 @@ describe('ToDoAPI', () => {
     it('should set valid todos array', () => {
       var todos = [{
         id: 23,
-        test: 'test all files',
+        text: 'test all files',
         completed: false
       }];
       ToDoAPI.setToDos(todos);
@@ -42,7 +42,7 @@ describe('ToDoAPI', () => {
     it('should return todo if valid array is localstorage', () => {
       var todos = [{
         id: 23,
-        test: 'test all files',
+        text: 'test all files',
         completed: false
       }];
 
@@ -50,6 +50,49 @@ describe('ToDoAPI', () => {
       var actualToDos = ToDoAPI.getToDos();
 
       expect(actualToDos).toEqual(todos);
+    });
+  });
+
+  describe('filterToDos', () => {
+    var todos = [{
+      id: 1,
+      text: "Some random text",
+      completed: true
+    }, {
+      id: 2,
+      text: "Anotha one!",
+      completed: false
+    },{
+      id: 3,
+      text: "And Anotha One!",
+      completed: true
+    }];
+
+    it('should return all items if showCompleted is true', () => {
+      var filteredToDos = ToDoAPI.filterToDos(todos, true, '');
+
+      expect(filteredToDos.length).toBe(3);
+    });
+
+    it('should return non-completed items if showCompleted is false', () => {
+      var filteredToDos = ToDoAPI.filterToDos(todos, false, '');
+
+      expect(filteredToDos.length).toBe(1);
+    });
+
+    it('should sort by completed status', () => {
+      var filteredToDos = ToDoAPI.filterToDos(todos, true,'');
+      expect(filteredToDos[0].completed).toBe(false);
+    });
+
+    it('should filter todos by searchToDo', () => {
+      var filteredToDos = ToDoAPI.filterToDos(todos, true, 'anotha');
+      expect(filteredToDos.length).toBe(2);
+    });
+
+    it('should return all todos if searchToDo is empty', () => {
+      var filteredToDos = ToDoAPI.filterToDos(todos, true, '');
+      expect(filteredToDos.length).toBe(3);
     });
   });
 });
