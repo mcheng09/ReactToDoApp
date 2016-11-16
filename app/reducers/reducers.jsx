@@ -28,7 +28,7 @@ export var toDoReducer = (state=[], action) => {
           id: uuid(),
           text: action.text,
           completed: false,
-          createdAt: moment().unix,
+          createdAt: moment().unix(),
           completedAt: undefined
         }
       ];
@@ -42,6 +42,9 @@ export var toDoReducer = (state=[], action) => {
             completed: nextCompleted,
             completedAt: nextCompleted ? moment().unix() : undefined
            };
+        }
+        else {
+          return todo;
         }
       });
     default:
