@@ -7,13 +7,15 @@
    render: function() {
      var {todos, showCompleted, searchText} = this.props;
      var renderToDos = () => {
-       if (todos.length === 0) {
+       var filteredToDos = ToDoAPI.filterToDos(todos, showCompleted, searchText)
+
+       if (filteredToDos.length === 0) {
          return (
            <p className="container__message">Nothing To Do</p>
          )
        }
 
-       return ToDoAPI.filterToDos(todos, showCompleted, searchText).map((todo) => {
+       return filteredToDos.map((todo) => {
          return (
            <ToDo key={todo.id} {...todo}/>
          );

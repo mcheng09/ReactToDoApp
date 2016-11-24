@@ -9,15 +9,7 @@ var actions = require('actions');
 var store = require('configureStore').configure();
 var ToDoAPI = require('ToDoAPI');
 
-store.subscribe(() => {
-  var state = store.getState();
-  console.log('New State', state);
-
-  ToDoAPI.setToDos(state.todos);
-});
-
-var initialToDos = ToDoAPI.getToDos();
-store.dispatch(actions.addToDos(initialToDos));
+store.dispatch(actions.startAddToDos());
 
 // Load Foundation
 $(document).foundation();

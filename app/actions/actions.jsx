@@ -48,6 +48,26 @@ export var addToDos = (todos) => {
   }
 };
 
+export var startAddToDos = () => {
+  return (dispatch, getState) => {
+    var toDosRef = firebaseRef.child('todos');
+
+    return toDosRef.once('value').then((snapshot) => {
+      var todos = snapshot.val() || {};
+      var parsedToDos = [];
+
+      Object.keys(todos).forEach((todoId) => {
+        parsedToDos.push({
+          id: todoId,
+          ...todos[todoId]
+        });
+      });
+
+      dispatch(addToDos(parsedToDos));
+    });
+  };
+};
+
 // toggleToDo(id) TOGGLE_TODO
 export var updateToDo = (id, updates) => {
   return {

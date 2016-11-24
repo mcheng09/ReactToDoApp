@@ -11,48 +11,6 @@ describe('ToDoAPI', () => {
     expect(ToDoAPI).toExist();
   });
 
-  describe('setToDos', () => {
-    it('should set valid todos array', () => {
-      var todos = [{
-        id: 23,
-        text: 'test all files',
-        completed: false
-      }];
-      ToDoAPI.setToDos(todos);
-
-      var actualToDos = JSON.parse(localStorage.getItem('todos'));
-
-      expect(actualToDos).toEqual(todos);
-    });
-
-    it('should not set invalid todos array', () => {
-      var badToDos = {a: 'b'};
-      ToDoAPI.setToDos(badToDos);
-
-      expect(localStorage.getItem('todos')).toBe(null);
-    });
-  });
-
-  describe('getToDos', () => {
-    it('should return empty array for bad localstorage data', () => {
-      var actualToDos = ToDoAPI.getToDos();
-      expect(actualToDos).toEqual([]);
-    });
-
-    it('should return todo if valid array is localstorage', () => {
-      var todos = [{
-        id: 23,
-        text: 'test all files',
-        completed: false
-      }];
-
-      localStorage.setItem('todos', JSON.stringify(todos));
-      var actualToDos = ToDoAPI.getToDos();
-
-      expect(actualToDos).toEqual(todos);
-    });
-  });
-
   describe('filterToDos', () => {
     var todos = [{
       id: 1,
