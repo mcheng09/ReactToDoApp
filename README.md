@@ -4,4 +4,4 @@ Node.js, Express, React, Redux, Foundation, Mocha, Karma, Webpack
 
 ### Link
 
-http://obscure-falls-44057.herokuapp.com/
+http://app-react-todo.herokuapp.com/
